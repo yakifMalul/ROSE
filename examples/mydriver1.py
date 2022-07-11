@@ -69,29 +69,30 @@ def row(world):
 
     next_row_scores = pos_to_score(world, next_row)
     best_index = find_best(next_row_scores)
-    if next_row_scores[best_index] == 0 and next_row_scores[1] == 0:
-        # go mid
-        if right_balance > 0:
-            # left
-            return actions.LEFT
-        elif right_balance < 0:
-            # right
-            return actions.RIGHT
-        else:
-            # stay
-            return actions.NONE
-    else:
-        # go best
-        best_pos = next_row[best_index]
-        if x - best_pos[0] > 0:
-            # left
-            return actions.LEFT
-        elif x - best_pos[0] < 0:
-            # right
-            return actions.RIGHT
-        else:
-            # straight
-            return actions.NONE
+    return actions.RIGHT
+    # if next_row_scores[best_index] == 0 and next_row_scores[1] == 0:
+    #     # go mid
+    #     if right_balance > 0:
+    #         # left
+    #         return actions.LEFT
+    #     elif right_balance < 0:
+    #         # right
+    #         return actions.RIGHT
+    #     else:
+    #         # stay
+    #         return actions.NONE
+    # else:
+    #     # go best
+    #     best_pos = next_row[best_index]
+    #     if x - best_pos[0] > 0:
+    #         # left
+    #         return actions.LEFT
+    #     elif x - best_pos[0] < 0:
+    #         # right
+    #         return actions.RIGHT
+    #     else:
+    #         # straight
+    #         return actions.NONE
 
 
 
