@@ -5,12 +5,13 @@ from rose.common import obstacles, actions  # NOQA
 
 driver_name = "Amit"
 
+def water
 
 def drive(world):
     x = world.car.x
     y = world.car.y
     obstacle = world.get((x, y - 1))
-    if world.get((x, y - 1)) == obstacles.PENGUIN:
+    if world.get((x, y)) == obstacles.PENGUIN:
         return actions.PICKUP
     elif obstacle == obstacles.WATER:
         return actions.BRAKE
