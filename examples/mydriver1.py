@@ -57,14 +57,14 @@ def row(world):
     global right_balance
     x = world.car.x
     y = world.car.y
-    next_row = list()
+    next_row = [(x - 1, y - 1), (x, y - 1), (x+1, y - 1)]
 
-    if right_balance == 1:
-        next_row = [(x-1, y-1), (x, y-1)]
-    elif right_balance == 0:
-        next_row = [(x - 1, y - 1), (x, y - 1), (x+1, y - 1)]
-    elif right_balance == -1:
-        next_row = [(x, y - 1), (x + 1, y - 1)]
+    # if right_balance == 1:
+    #     next_row = [(x-1, y-1), (x, y-1)]
+    # elif right_balance == 0:
+    #     next_row = [(x - 1, y - 1), (x, y - 1), (x + 1, y - 1)]
+    # elif right_balance == -1:
+    #     next_row = [(x, y - 1), (x + 1, y - 1)]
 
     next_row_scores = pos_to_score(world, next_row)
     best_index = find_best(next_row_scores)
@@ -77,7 +77,8 @@ def row(world):
             # right
             return actions.LEFT
         else:
-            return None
+            # stay
+            return actions.NONE
     else:
         # go best
         best_pos = next_row[best_index]
