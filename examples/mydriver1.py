@@ -75,7 +75,7 @@ def row(world):
             return actions.LEFT
         elif right_balance < 0:
             # right
-            return actions.LEFT
+            return actions.RIGHT
         else:
             # stay
             return actions.NONE
@@ -98,7 +98,7 @@ def row(world):
 
 
 def drive(world):
-    row(world)
+    return row(world)
     # x = world.car.x
     # y = world.car.y
     # obstacle = world.get((x, y - 1))
@@ -115,4 +115,4 @@ def drive(world):
     # elif obstacle == obstacles.BARRIER:
     #     return move()
 
-    return actions.NONE
+    # return actions.NONE
