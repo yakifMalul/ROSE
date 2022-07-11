@@ -80,7 +80,7 @@ def row(world):
             return None
     else:
         # go best
-        best_pos = next_row(best_index)
+        best_pos = next_row[best_index]
         if x - best_pos[0] > 0:
             # left
             return actions.LEFT
