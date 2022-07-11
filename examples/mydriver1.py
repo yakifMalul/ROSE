@@ -100,7 +100,9 @@ def row(world):
 
 
 def drive(world):
+    return actions.RIGHT
     return row(world)
+
     # x = world.car.x
     # y = world.car.y
     # obstacle = world.get((x, y - 1))
