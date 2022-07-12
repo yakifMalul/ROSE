@@ -135,7 +135,7 @@ def way_to_actions(way):
 
 def drive(world):
     global right_balance, action_list, cnt
-    res = actions.RIGHT
+    res = actions.NONE
 
     x = world.car.x
     y = world.car.y
@@ -146,18 +146,18 @@ def drive(world):
         res = actions.BRAKE
     elif obstacle == obstacles.CRACK:
         res = actions.JUMP
-    else:
-        if cnt >= 3:
-            cnt = 0
-        if cnt == 0:
-            score_board = world_to_score_board(world, right_balance)
-            action_list = way_to_actions(best_way(world, score_board, right_balance))
-            res = action_list[0]
-        elif 0 < cnt < 3:
-            res = action_list[cnt]
-    cnt += 1
-    if res == actions.RIGHT:
-        right_balance += 1
-    elif res == actions.LEFT:
-        right_balance -= 1
+    # else:
+    #     if cnt >= 3:
+    #         cnt = 0
+    #     if cnt == 0:
+    #         score_board = world_to_score_board(world, right_balance)
+    #         action_list = way_to_actions(best_way(world, score_board, right_balance))
+    #         res = action_list[0]
+    #     elif 0 < cnt < 3:
+    #         res = action_list[cnt]
+    # cnt += 1
+    # if res == actions.RIGHT:
+    #     right_balance += 1
+    # elif res == actions.LEFT:
+    #     right_balance -= 1
     return res
