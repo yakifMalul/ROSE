@@ -171,5 +171,5 @@ def drive(world):
         elif 0 < cnt < num_of_steps - 1:
             res = action_list[cnt]
     cnt += 1
-
+    print(res)
     return res
