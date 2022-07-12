@@ -100,12 +100,12 @@ def best_way(world, score_board):
                 score_j = score_board[j[1]][j[0]]
             total_score = score_def + score_i + score_j
             ways[total_score] = [(x, y), i, j]
-            for k in get_connected(j[0], j[1]):
-                score_k = 0
-                if k[0] == j[0]:
-                    score_k = score_board[k[1]][k[0]]
-                total_score = score_def + score_i + score_j + score_k
-                ways[total_score] = [(x, y), i, j, k]
+            # for k in get_connected(j[0], j[1]):
+            #     score_k = 0
+            #     if k[0] == j[0]:
+            #         score_k = score_board[k[1]][k[0]]
+            #     total_score = score_def + score_i + score_j + score_k
+            #     ways[total_score] = [(x, y), i, j, k]
     for i in ways.keys():
         print(str(i) + ": ", end="")
         print(ways[i])
