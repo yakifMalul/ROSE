@@ -165,7 +165,7 @@ def drive(world):
     #     res = action_list[0]
     # elif 0 < cnt < num_of_steps - 1:
     #     res = action_list[cnt]
-    if steps < 55:
+    if steps <= 55:
         score_board = world_to_score_board(world)
         action_list = way_to_actions(best_way(world, score_board))
         res = action_list[0]
@@ -191,5 +191,5 @@ def drive(world):
 
     cnt += 1
     steps += 1
-    print(res)
+    print(steps)
     return res
