@@ -156,8 +156,8 @@ def drive(world):
             score_board = world_to_score_board(world, right_balance)
             action_list = [actions.RIGHT, actions.LEFT, actions.RIGHT] # way_to_actions(best_way(world, score_board, right_balance))
             res = action_list[0]
-    #     elif 0 < cnt < 3:
-    #         res = action_list[cnt]
+        elif 0 < cnt < 3:
+            res = action_list[cnt]
     cnt += 1
     if res == actions.RIGHT:
         right_balance += 1
