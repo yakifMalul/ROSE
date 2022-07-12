@@ -8,7 +8,7 @@ action_list = list()
 cnt = 0
 x1, x2, x3 = 0, 0, 0
 got_x_values = False
-num_of_steps = 8
+num_of_steps = 5
 
 
 def get_x_values(x):
@@ -107,20 +107,8 @@ def best_way(world, score_board):
                     score_l = 0
                     if l[0] == k[0]:
                         score_l = score_board[l[1]][l[0]]
-                    for m in get_connected(l[0], l[1]):
-                        score_m = 0
-                        if m[0] == l[0]:
-                            score_m = score_board[m[1]][m[0]]
-                        for n in get_connected(m[0], m[1]):
-                            score_n = 0
-                            if n[0] == m[0]:
-                                score_n = score_board[n[1]][n[0]]
-                            for o in get_connected(n[0], n[1]):
-                                score_o = 0
-                                if o[0] == n[0]:
-                                    score_o = score_board[o[1]][o[0]]
-                                total_score = score_def + score_i + score_j + score_k + score_l + score_m + score_n + score_o
-                                ways[total_score] = [i, j, k, l, m, n, o]
+                    total_score = score_def + score_i + score_j + score_k + score_l
+                    ways[total_score] = [(x, y), i, j, k, l]
     for i in ways.keys():
         print(str(i) + ": ", end="")
         print(ways[i])
