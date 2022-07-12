@@ -6,6 +6,7 @@ from rose.common import obstacles, actions  # NOQA
 driver_name = "Amit"
 action_list = list()
 cnt = 0
+steps = 0
 x1, x2, x3 = 0, 0, 0
 got_x_values = False
 num_of_steps = 5
@@ -149,7 +150,7 @@ def way_to_actions(way):
 
 
 def drive(world):
-    global action_list, cnt, num_of_steps
+    global action_list, cnt, num_of_steps, steps
     res = actions.NONE
     x = world.car.x
     y = world.car.y
@@ -160,15 +161,24 @@ def drive(world):
     # if cnt == 0:
     #     score_board = world_to_score_board(world)
     #     action_list = way_to_actions(best_way(world, score_board))
-    #     # action_list.insert(0, actions.NONE)
     #     print(action_list)
     #     res = action_list[0]
     # elif 0 < cnt < num_of_steps - 1:
     #     res = action_list[cnt]
-
-    score_board = world_to_score_board(world)
-    action_list = way_to_actions(best_way(world, score_board))
-    res = action_list[0]
+    if steps < 55:
+        score_board = world_to_score_board(world)
+        action_list = way_to_actions(best_way(world, score_board))
+        res = action_list[0]
+    else:
+        if cnt >= num_of_steps - 1:
+            cnt = 0
+        if cnt == 0:
+            score_board = world_to_score_board(world)
+            action_list = way_to_actions(best_way(world, score_board))
+            print(action_list)
+            res = action_list[0]
+        elif 0 < cnt < num_of_steps - 1:
+            res = action_list[cnt]
 
     if res == actions.NONE:
         obstacle = world.get((x, y - 1))
@@ -180,5 +190,6 @@ def drive(world):
             res = actions.JUMP
 
     cnt += 1
+    steps += 1
     print(res)
     return res
