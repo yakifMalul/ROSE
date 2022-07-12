@@ -135,7 +135,7 @@ def way_to_actions(way):
 
 def drive(world):
     global right_balance, action_list, cnt
-    res = actions.NONE
+    res = actions.RIGHT
 
     x = world.car.x
     y = world.car.y
