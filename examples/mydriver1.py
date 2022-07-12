@@ -4,31 +4,24 @@ This driver does not do any action.
 from rose.common import obstacles, actions  # NOQA
 
 driver_name = "Amit"
-right_balance = 0
 action_list = list()
 cnt = 0
+x1, x2, x3 = 0, 0, 0
+got_x_values = False
 
 
-def calculate_right_balance(x1, x2):
-    global right_balance
-    if x1 > x2:
-        return -1 + right_balance
-    if x1 < x2:
-        return 1 + right_balance
-    return right_balance
+def get_x_values(x):
+    global got_x_values, x1, x2, x3
+    if not got_x_values:
+        x1 = x - 1
+        x2 = x
+        x3 = x + 1
+        got_x_values = True
 
 
-def row(world, right_balance, y):
-    res = list()
-    x = world.car.x
-
-    if right_balance > 0:
-        res = [(x - 2, y - 1), (x - 1, y - 1), (x, y - 1)]
-    elif right_balance == 0:
-        res = [(x - 1, y - 1), (x, y - 1), (x + 1, y - 1)]
-    elif right_balance < 0:
-        res = [(x, y - 1), (x + 1, y - 1), (x - 2, y - 1)]
-
+def row(y):
+    global x1, x2, x3
+    res = [(x1, y - 1), (x2, y - 1), (x3, y - 1)]
     return res
 
 
@@ -58,36 +51,38 @@ def pos_to_score(world, pos):
     return res
 
 
-def world_to_score_board(world, right_balance):
+def world_to_score_board(world):
     score_board = list()
     y = world.car.y
 
     for i in range(3, 0, -1):
-        score_board.append(pos_to_score(world, row(world, right_balance, y-i)))
+        score_board.append(pos_to_score(world, row(y-i)))
     return score_board
 
 
-def get_connected(right_balance, y):
+def get_connected(x, y):
+    global x1, x2, x3
     res = list()
-    if right_balance == -1:
+    if x == x1:
         res.append((0, y - 1))
         res.append((1, y - 1))
-    elif right_balance == 0:
+    elif x == x2:
         res.append((0, y - 1))
         res.append((1, y - 1))
         res.append((2, y - 1))
-    elif right_balance == 1:
+    elif x == x3:
         res.append((1, y - 1))
         res.append((2, y - 1))
     return res
 
 
-def best_way(world, score_board, right_balance):
-    y = 2
+def best_way(world, score_board):
+    y = len(score_board) - 1
+    x = world.car.x
 
-    if right_balance > 0:
+    if x == x3:
         x = 2
-    elif right_balance == 0:
+    elif x == x2:
         x = 1
     else:
         x = 0
@@ -95,15 +90,15 @@ def best_way(world, score_board, right_balance):
     ways = dict()
     score_def = 0
     score_def += score_board[y][x]
-    for i in get_connected(right_balance, y):
+    for i in get_connected(x, y):
         score_i = 0
         if i[0] == x:
             score_i = score_board[i[1]][i[0]]
-        for j in get_connected(calculate_right_balance(x, i[0]), i[1]):
+        for j in get_connected(i[0], i[1]):
             score_j = 0
             if j[0] == i[0]:
                 score_j = score_board[j[1]][j[0]]
-            for k in get_connected(calculate_right_balance(x, j[0]), j[1]):
+            for k in get_connected(j[0], j[1]):
                 score_k = 0
                 if k[0] == j[0]:
                     score_k = score_board[k[1]][k[0]]
@@ -135,16 +130,16 @@ def way_to_actions(way):
             res.append(actions.LEFT)
         else:
             # mid
-            res.append(actions.LEFT)
+            res.append(actions.NONE)
     return res
 
 
 def drive(world):
     global right_balance, action_list, cnt
     res = actions.NONE
-
     x = world.car.x
     y = world.car.y
+    get_x_values(x)
     obstacle = world.get((x, y - 1))
     if world.get((x, y-1)) == obstacles.PENGUIN:
         res = actions.PICKUP
@@ -156,14 +151,11 @@ def drive(world):
         if cnt >= 3:
             cnt = 0
         if cnt == 0:
-            score_board = world_to_score_board(world, right_balance)
-            action_list = way_to_actions(best_way(world, score_board, right_balance))
+            score_board = world_to_score_board(world)
+            action_list = way_to_actions(best_way(world, score_board))
             res = action_list[0]
         elif 0 < cnt < 3:
             res = action_list[cnt]
     cnt += 1
-    if res == actions.RIGHT:
-        right_balance += 1
-    elif res == actions.LEFT:
-        right_balance -= 1
+
     return res
