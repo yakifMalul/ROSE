@@ -146,10 +146,10 @@ def drive(world):
     else:
         if cnt == 3:
             cnt = 0
-        if cnt == 0:
+        if cnt - 1 == 0:
             score_board = world_to_score_board(world)
             action_list = way_to_actions(best_way(world, score_board, right_balance))
             return action_list[0]
-        elif 0 < cnt < 3:
-            return action_list[cnt - 1]
+        elif 0 < cnt - 1 < 3:
+            return action_list[cnt - 2]
     return actions.NONE
