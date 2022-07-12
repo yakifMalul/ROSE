@@ -8,6 +8,7 @@ action_list = list()
 cnt = 0
 x1, x2, x3 = 0, 0, 0
 got_x_values = False
+num_of_steps = 4
 
 
 def get_x_values(x):
@@ -52,10 +53,11 @@ def pos_to_score(world, pos):
 
 
 def world_to_score_board(world):
+    global num_of_steps
     score_board = list()
     y = world.car.y
 
-    for i in range(3, 0, -1):
+    for i in range(num_of_steps, 0, -1):
         score_board.append(pos_to_score(world, row(y-i)))
     return score_board
 
@@ -98,14 +100,12 @@ def best_way(world, score_board):
             score_j = 0
             if j[0] == i[0]:
                 score_j = score_board[j[1]][j[0]]
-            total_score = score_def + score_i + score_j
-            ways[total_score] = [(x, y), i, j]
-            # for k in get_connected(j[0], j[1]):
-            #     score_k = 0
-            #     if k[0] == j[0]:
-            #         score_k = score_board[k[1]][k[0]]
-            #     total_score = score_def + score_i + score_j + score_k
-            #     ways[total_score] = [(x, y), i, j, k]
+            for k in get_connected(j[0], j[1]):
+                score_k = 0
+                if k[0] == j[0]:
+                    score_k = score_board[k[1]][k[0]]
+                total_score = score_def + score_i + score_j + score_k
+                ways[total_score] = [(x, y), i, j, k]
     for i in ways.keys():
         print(str(i) + ": ", end="")
         print(ways[i])
@@ -137,7 +137,7 @@ def way_to_actions(way):
 
 
 def drive(world):
-    global action_list, cnt
+    global action_list, cnt, num_of_steps
     res = actions.NONE
     x = world.car.x
     y = world.car.y
@@ -150,13 +150,13 @@ def drive(world):
     elif obstacle == obstacles.CRACK:
         res = actions.JUMP
     else:
-        if cnt >= 3:
+        if cnt >= num_of_steps:
             cnt = 0
         if cnt == 0:
             score_board = world_to_score_board(world)
             action_list = way_to_actions(best_way(world, score_board))
             res = action_list[0]
-        elif 0 < cnt < 3:
+        elif 0 < cnt < num_of_steps:
             res = action_list[cnt]
     cnt += 1
 
