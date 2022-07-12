@@ -135,17 +135,17 @@ def way_to_actions(way):
 
 def drive(world):
     # global right_balance, action_list, cnt
-    # res = actions.NONE
-    #
-    # x = world.car.x
-    # y = world.car.y
-    # obstacle = world.get((x, y - 1))
-    # if world.get((x, y)) == obstacles.PENGUIN:
-    #     res = actions.PICKUP
-    # elif obstacle == obstacles.WATER:
-    #     res = actions.BRAKE
-    # elif obstacle == obstacles.CRACK:
-    #     res = actions.JUMP
+    res = actions.NONE
+
+    x = world.car.x
+    y = world.car.y
+    obstacle = world.get((x, y - 1))
+    if world.get((x, y)) == obstacles.PENGUIN:
+        res = actions.PICKUP
+    elif obstacle == obstacles.WATER:
+        res = actions.BRAKE
+    elif obstacle == obstacles.CRACK:
+        res = actions.JUMP
     # else:
     #     if cnt == 3:
     #         cnt = 0
@@ -160,6 +160,4 @@ def drive(world):
     #     right_balance += 1
     # elif res == actions.LEFT:
     #     right_balance -= 1
-    # return res
-    return actions.NONE
-#
+    return res
