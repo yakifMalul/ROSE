@@ -36,7 +36,7 @@ def pos_to_score(world, pos):
     temp = list()
     res = list()
     for item in pos:
-        temp.append(world.get(item[0], item[1]))
+        temp.append(world.get(item))
     for item in temp:
         if item == obstacles.PENGUIN:
             score = 10
