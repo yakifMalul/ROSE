@@ -18,16 +18,16 @@ def calculate_right_balance(x1, x2):
     return right_balance
 
 
-def row(world, y):
-    row = list()
+def row(world, right_balance, y):
+    res = list()
     x = world.car.x
 
     if right_balance > 0:
-        row = [(x - 2, y - 1), (x - 1, y - 1), (x, y - 1)]
+        res = [(x - 2, y - 1), (x - 1, y - 1), (x, y - 1)]
     elif right_balance == 0:
-        row = [(x - 1, y - 1), (x, y - 1), (x + 1, y - 1)]
+        res = [(x - 1, y - 1), (x, y - 1), (x + 1, y - 1)]
     elif right_balance < 0:
-        row = [(x, y - 1), (x + 1, y - 1), (x - 2, y - 1)]
+        res = [(x, y - 1), (x + 1, y - 1), (x - 2, y - 1)]
 
     return row
 
@@ -59,12 +59,12 @@ def pos_to_score(world, pos):
     return res
 
 
-def world_to_score_board(world):
+def world_to_score_board(world, right_balance):
     score_board = list()
     y = world.car.y
 
     for i in range(3, 0, -1):
-        score_board.append(pos_to_score(world, row(world, y-i)))
+        score_board.append(pos_to_score(world, row(world, right_balance, y-i)))
     return score_board
 
 
@@ -148,7 +148,7 @@ def drive(world):
         if cnt == 3:
             cnt = 0
         if cnt == 0:
-            score_board = world_to_score_board(world)
+            score_board = world_to_score_board(world, right_balance)
             action_list = way_to_actions(best_way(world, score_board, right_balance))
             res = action_list[0]
         elif 0 < cnt < 3:
