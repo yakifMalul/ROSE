@@ -47,6 +47,7 @@ def pos_to_score(world, pos):
         else:
             score = 0
         res.append(score)
+    print(temp)
     print(res)
 
     return res
