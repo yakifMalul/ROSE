@@ -116,21 +116,21 @@ def best_way(world, score_board, right_balance):
 
 
 def way_to_actions(way):
-    action_list = list()
+    res = list()
     for i in range(len(way) - 1):
         x_0 = way[i][0]
         x_1 = way[i+1][0]
 
         if x_1 - x_0 > 0:
             # right
-            action_list.append(actions.RIGHT)
+            res.append(actions.RIGHT)
         elif x_1 - x_0 < 0:
             # left
-            action_list.append(actions.LEFT)
+            res.append(actions.LEFT)
         else:
             # mid
-            action_list.append(actions.NONE)
-    return action_list
+            res.append(actions.LEFT)
+    return res
 
 
 def drive(world):
