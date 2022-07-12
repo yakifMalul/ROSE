@@ -153,13 +153,13 @@ def drive(world):
     elif obstacle == obstacles.CRACK:
         res = actions.JUMP
     else:
-        if cnt >= num_of_steps - 3:
+        if cnt >= num_of_steps:
             cnt = 0
         if cnt == 0:
             score_board = world_to_score_board(world)
             action_list = way_to_actions(best_way(world, score_board))
             res = action_list[0]
-        elif 0 < cnt < num_of_steps - 3:
+        elif 0 < cnt < num_of_steps:
             res = action_list[cnt]
     cnt += 1
 
