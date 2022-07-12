@@ -38,7 +38,7 @@ def pos_to_score(world, pos):
     for item in pos:
         x = item[0]
         y = item[1]
-        obstacle = world.get((x, y))
+        obstacle = world.get(item)
         temp.append(obstacle)
     for item in temp:
         if item == obstacles.PENGUIN:
