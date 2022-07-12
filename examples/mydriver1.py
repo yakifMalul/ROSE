@@ -58,7 +58,7 @@ def world_to_score_board(world):
     score_board = list()
     y = world.car.y
 
-    for i in range(num_of_steps, 0, -1):
+    for i in range(num_of_steps, -1, -1):
         score_board.append(pos_to_score(world, row(y-i)))
     return score_board
 
@@ -154,24 +154,27 @@ def drive(world):
     x = world.car.x
     y = world.car.y
     get_x_values(x)
-    obstacle = world.get((x, y - 1))
-    if world.get((x, y-1)) == obstacles.PENGUIN:
-        res = actions.PICKUP
-    elif obstacle == obstacles.WATER:
-        res = actions.BRAKE
-    elif obstacle == obstacles.CRACK:
-        res = actions.JUMP
-    else:
-        if cnt >= num_of_steps - 1:
-            cnt = 0
-        if cnt == 0:
-            score_board = world_to_score_board(world)
-            action_list = way_to_actions(best_way(world, score_board))
-            # action_list.insert(0, actions.NONE)
-            print(action_list)
-            res = action_list[0]
-        elif 0 < cnt < num_of_steps - 1:
-            res = action_list[cnt]
+
+    if cnt >= num_of_steps - 1:
+        cnt = 0
+    if cnt == 0:
+        score_board = world_to_score_board(world)
+        action_list = way_to_actions(best_way(world, score_board))
+        # action_list.insert(0, actions.NONE)
+        print(action_list)
+        res = action_list[0]
+    elif 0 < cnt < num_of_steps - 1:
+        res = action_list[cnt]
+
+    if res == actions.NONE:
+        obstacle = world.get((x, y - 1))
+        if obstacle == obstacles.PENGUIN:
+            res = actions.PICKUP
+        elif obstacle == obstacles.WATER:
+            res = actions.BRAKE
+        elif obstacle == obstacles.CRACK:
+            res = actions.JUMP
+
     cnt += 1
     print(res)
     return res
