@@ -36,10 +36,7 @@ def pos_to_score(world, pos):
     temp = list()
     res = list()
     for item in pos:
-        x = item[0]
-        y = item[1]
-        obstacle = world.get(item)
-        temp.append(obstacle)
+        temp.append(world.get(item))
     for item in temp:
         if item == obstacles.PENGUIN:
             score = 10
@@ -154,7 +151,7 @@ def drive(world):
             cnt = 0
         if cnt == 0:
             score_board = world_to_score_board(world, right_balance)
-            action_list = [actions.RIGHT, actions.LEFT, actions.RIGHT] # way_to_actions(best_way(world, score_board, right_balance))
+            action_list = way_to_actions(best_way(world, score_board, right_balance))
             res = action_list[0]
         elif 0 < cnt < 3:
             res = action_list[cnt]
