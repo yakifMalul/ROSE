@@ -89,7 +89,7 @@ def best_way(world, score_board):
     elif x == x1:
         x = 0
 
-    ways = dict()
+    ways = {0: [(1, 3), (1, 2), (1, 0), (1, 0)]}
     score_def = 0
     score_def += score_board[y][x]
     for i in get_connected(x, y):
