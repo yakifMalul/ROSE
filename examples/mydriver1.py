@@ -85,11 +85,11 @@ def get_connected(right_balance, y):
 def best_way(world, score_board, right_balance):
     y = 2
 
-    if right_balance == 1:
+    if right_balance > 0:
         x = 2
     elif right_balance == 0:
         x = 1
-    elif right_balance == -1:
+    else:
         x = 0
 
     ways = dict()
