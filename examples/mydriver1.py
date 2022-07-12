@@ -29,7 +29,7 @@ def row(world, right_balance, y):
     elif right_balance < 0:
         res = [(x, y - 1), (x + 1, y - 1), (x - 2, y - 1)]
 
-    return row
+    return res
 
 
 def pos_to_score(world, pos):
