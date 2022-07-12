@@ -95,25 +95,25 @@ def best_way(world, score_board):
         score_i = 0
         if i[0] == x:
             score_i = score_board[i[1]][i[0]]
-        elif score_board[i[1]][i[0]] != 10:
+        elif score_board[i[1]][i[0]] != 10 and score_board[i[1]][i[0]] != 0:
             score_i = -10
         for j in get_connected(i[0], i[1]):
             score_j = 0
             if j[0] == i[0]:
                 score_j = score_board[j[1]][j[0]]
-            elif score_board[j[1]][j[0]] != 10:
+            elif score_board[j[1]][j[0]] != 10 and score_board[j[1]][j[0]] != 0:
                 score_j = -10
             for k in get_connected(j[0], j[1]):
                 score_k = 0
                 if k[0] == j[0]:
                     score_k = score_board[k[1]][k[0]]
-                elif score_board[k[1]][k[0]] != 10:
+                elif score_board[k[1]][k[0]] != 10 and score_board[k[1]][k[0]] != 0:
                     score_k = -10
                 for l in get_connected(k[0], k[1]):
                     score_l = 0
                     if l[0] == k[0]:
                         score_l = score_board[l[1]][l[0]]
-                    elif score_board[l[1]][l[0]] != 10:
+                    elif score_board[l[1]][l[0]] != 10 and score_board[l[1]][l[0]] != 0:
                         score_l = -10
                     total_score = score_def + score_i + score_j + score_k + score_l
                     ways[total_score] = [(x, y), i, j, k, l]
