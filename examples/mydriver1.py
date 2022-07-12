@@ -84,7 +84,7 @@ def best_way(world, score_board):
         x = 2
     elif x == x2:
         x = 1
-    else:
+    elif x == x1:
         x = 0
 
     ways = dict()
@@ -135,7 +135,7 @@ def way_to_actions(way):
 
 
 def drive(world):
-    global right_balance, action_list, cnt
+    global action_list, cnt
     res = actions.NONE
     x = world.car.x
     y = world.car.y
