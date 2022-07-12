@@ -155,16 +155,20 @@ def drive(world):
     y = world.car.y
     get_x_values(x)
 
-    if cnt >= num_of_steps - 1:
-        cnt = 0
-    if cnt == 0:
-        score_board = world_to_score_board(world)
-        action_list = way_to_actions(best_way(world, score_board))
-        # action_list.insert(0, actions.NONE)
-        print(action_list)
-        res = action_list[0]
-    elif 0 < cnt < num_of_steps - 1:
-        res = action_list[cnt]
+    # if cnt >= num_of_steps - 1:
+    #     cnt = 0
+    # if cnt == 0:
+    #     score_board = world_to_score_board(world)
+    #     action_list = way_to_actions(best_way(world, score_board))
+    #     # action_list.insert(0, actions.NONE)
+    #     print(action_list)
+    #     res = action_list[0]
+    # elif 0 < cnt < num_of_steps - 1:
+    #     res = action_list[cnt]
+
+    score_board = world_to_score_board(world)
+    action_list = way_to_actions(best_way(world, score_board))
+    res = action_list[0]
 
     if res == actions.NONE:
         obstacle = world.get((x, y - 1))
