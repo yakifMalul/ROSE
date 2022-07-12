@@ -151,7 +151,7 @@ def drive(world):
             cnt = 0
         if cnt == 0:
             score_board = world_to_score_board(world, right_balance)
-            # action_list = way_to_actions(best_way(world, score_board, right_balance))
+            action_list = [actions.RIGHT, actions.LEFT, actions.RIGHT] # way_to_actions(best_way(world, score_board, right_balance))
             # res = action_list[0]
     #     elif 0 < cnt < 3:
     #         res = action_list[cnt]
