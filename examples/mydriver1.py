@@ -152,4 +152,4 @@ def drive(world):
             return action_list[0]
         elif 0 < cnt < 3:
             return action_list[cnt - 1]
-    # return actions.NONE
+    return actions.NONE
