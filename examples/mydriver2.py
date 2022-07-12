@@ -58,7 +58,7 @@ def world_to_score_board(world):
     score_board = list()
     y = world.car.y
 
-    for i in range(num_of_steps, 0, -1):
+    for i in range(num_of_steps, -1, -1):
         score_board.append(pos_to_score(world, row(y-i)))
     return score_board
 
@@ -168,7 +168,7 @@ def drive(world):
 
     if res == actions.NONE:
         obstacle = world.get((x, y - 1))
-        if world.get((x, y - 1)) == obstacles.PENGUIN:
+        if obstacle == obstacles.PENGUIN:
             res = actions.PICKUP
         elif obstacle == obstacles.WATER:
             res = actions.BRAKE
