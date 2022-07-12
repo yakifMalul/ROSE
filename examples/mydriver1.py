@@ -22,7 +22,7 @@ def get_x_values(x):
 
 def row(y):
     global x1, x2, x3
-    res = [(x1, y - 1), (x2, y - 1), (x3, y - 1)]
+    res = [(x1, y), (x2, y), (x3, y)]
     return res
 
 
