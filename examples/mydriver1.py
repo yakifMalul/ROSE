@@ -63,7 +63,7 @@ def world_to_score_board(world):
     score_board = list()
     y = world.car.y
 
-    for i in range(4, 1):
+    for i in range(4, 1, -1):
         score_board.append(pos_to_score(world, row(world, y-i)))
     return score_board
 
