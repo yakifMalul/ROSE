@@ -65,14 +65,14 @@ def world_to_score_board(world):
 def get_connected(x, y):
     global x1, x2, x3
     res = list()
-    if x == x1:
+    if x == x1 or x == 0:
         res.append((0, y - 1))
         res.append((1, y - 1))
-    elif x == x2:
+    elif x == x2 or x == 1:
         res.append((0, y - 1))
         res.append((1, y - 1))
         res.append((2, y - 1))
-    elif x == x3:
+    elif x == x3 or x == 2:
         res.append((1, y - 1))
         res.append((2, y - 1))
     return res
@@ -90,8 +90,8 @@ def best_way(world, score_board):
         x = 0
 
     ways = {0: [(1, 3), (1, 2), (1, 0), (1, 0)]}
-    score_def = 0
-    score_def += score_board[y][x]
+    score_def = score_board[y][x]
+    total_score = 0
     for i in get_connected(x, y):
         score_i = 0
         if i[0] == x:
