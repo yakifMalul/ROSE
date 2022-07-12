@@ -89,7 +89,7 @@ def best_way(world, score_board):
 
     ways = dict()
     score_def = 0
-    score_def += score_board[y][x]
+    # score_def += score_board[y][x]
     for i in get_connected(x, y):
         score_i = 0
         if i[0] == x:
