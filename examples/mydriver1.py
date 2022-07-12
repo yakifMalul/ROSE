@@ -159,7 +159,7 @@ def drive(world):
             score_board = world_to_score_board(world)
             action_list = way_to_actions(best_way(world, score_board))
             res = action_list[0]
-        elif 0 < cnt < num_of_steps - 1:
+        elif 0 <= cnt < num_of_steps - 1:
             res = action_list[cnt]
     cnt += 1
 
