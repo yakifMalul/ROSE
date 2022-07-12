@@ -83,7 +83,7 @@ def get_connected(right_balance, y):
 
 
 def best_way(world, score_board, right_balance):
-    y = 3
+    y = 2
 
     if right_balance == 1:
         x = 2
