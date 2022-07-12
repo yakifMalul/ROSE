@@ -159,8 +159,8 @@ def drive(world):
     #     elif 0 < cnt < 3:
     #         res = action_list[cnt]
     cnt += 1
-    # if res == actions.RIGHT:
-    #     right_balance += 1
-    # elif res == actions.LEFT:
-    #     right_balance -= 1
+    if res == actions.RIGHT:
+        right_balance += 1
+    elif res == actions.LEFT:
+        right_balance -= 1
     return res
