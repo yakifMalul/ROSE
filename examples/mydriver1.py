@@ -37,7 +37,6 @@ def pos_to_score(world, pos):
     res = list()
     for item in pos:
         temp.append(world.get(item))
-    score = 0
     for item in temp:
         if item == obstacles.PENGUIN:
             score = 10
@@ -71,7 +70,7 @@ def world_to_score_board(world, right_balance):
 def get_connected(right_balance, y):
     res = list()
     if right_balance == -1:
-        res.append((0, y-1))
+        res.append((0, y - 1))
         res.append((1, y - 1))
     elif right_balance == 0:
         res.append((0, y - 1))
@@ -104,6 +103,9 @@ def best_way(world, score_board, right_balance):
                     score_k = score_board[k[1]][k[0]]
                 total_score = score_def + score_i + score_j + score_k
                 ways[total_score] = [(x, y), i, j, k]
+    for i in ways.keys():
+        print(str(i) + ": ", end="")
+        print(ways[i])
 
     big = list(ways)[0]
     for key in ways.keys():
@@ -154,4 +156,8 @@ def drive(world):
         elif 0 < cnt < 3:
             res = action_list[cnt]
     cnt += 1
+    if res == actions.RIGHT:
+        right_balance += 1
+    elif res == actions.LEFT:
+        right_balance -= 1
     return res
