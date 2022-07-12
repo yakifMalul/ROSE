@@ -87,7 +87,7 @@ def best_way(world, score_board):
     elif x == x1:
         x = 0
 
-    ways = {0: [(1, 3), (1, 2), (1, 1), (1, 0)]}
+    ways = dict()
     score_def = 0
     score_def += score_board[y][x]
     for i in get_connected(x, y):
@@ -98,6 +98,8 @@ def best_way(world, score_board):
             score_j = 0
             if j[0] == i[0]:
                 score_j = score_board[j[1]][j[0]]
+            total_score = score_def + score_i + score_j
+            ways[total_score] = [(x, y), i, j]
             for k in get_connected(j[0], j[1]):
                 score_k = 0
                 if k[0] == j[0]:
