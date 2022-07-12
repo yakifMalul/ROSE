@@ -83,8 +83,14 @@ def get_connected(right_balance, y):
 
 
 def best_way(world, score_board, right_balance):
-    x = world.car.x
     y = world.car.y
+
+    if right_balance == 1:
+        x = 2
+    elif right_balance == 0:
+        x = 1
+    elif right_balance == -1:
+        x = 0
 
     ways = dict()
     score_def = 0
