@@ -122,9 +122,11 @@ def best_way(world, score_board):
                         ways[total_score] = [(x, y), i, j, k, b]
                     elif 3 <= x <= 5:
                         if total_score in list(ways):
-                            pass
+                            print(str(total_score) + "is in ways")
+
                         else:
                             ways[total_score] = [(x, y), i, j, k, b]
+                            print(str(total_score) + "not in ways")
     for i in ways.keys():
         print(str(i) + ": ", end="")
         print(ways[i])
