@@ -118,9 +118,9 @@ def best_way(world, score_board):
                     elif score_board[b[1]][b[0]] != 10 and score_board[b[1]][b[0]] != 0:
                         score_b = -10
                     total_score = score_def + score_i + score_j + score_k + score_b
-                    if 0 <= x <= 2:
+                    if 0 <= worl.car.x <= 2:
                         ways[total_score] = [(x, y), i, j, k, b]
-                    elif 3 <= x <= 5:
+                    elif 3 <= world.car.x <= 5:
                         if total_score in list(ways):
                             print(str(total_score) + "is in ways")
 
