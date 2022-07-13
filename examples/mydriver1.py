@@ -190,6 +190,6 @@ def drive(world):
             res = actions.JUMP
 
     cnt += 1
-    steps = (steps + 1) % 60
-    print(steps)
+    steps = (steps + 1)%60
+    print(steps
     return res
