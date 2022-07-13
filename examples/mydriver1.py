@@ -182,5 +182,5 @@ def drive(world):
 
     cnt += 1
     steps = (steps + 1) % 60
-    print(steps)
+    print(x)
     return res
