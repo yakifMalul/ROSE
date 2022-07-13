@@ -111,14 +111,14 @@ def best_way(world, score_board):
                     score_k = score_board[k[1]][k[0]]
                 elif score_board[k[1]][k[0]] != 10 and score_board[k[1]][k[0]] != 0:
                     score_k = -10
-                for l in get_connected(k[0], k[1]):
-                    score_l = 0
-                    if l[0] == k[0]:
-                        score_l = score_board[l[1]][l[0]]
-                    elif score_board[l[1]][l[0]] != 10 and score_board[l[1]][l[0]] != 0:
-                        score_l = -10
-                    total_score = score_def + score_i + score_j + score_k + score_l
-                    ways[total_score] = [(x, y), i, j, k, l]
+                for b in get_connected(k[0], k[1]):
+                    score_b = 0
+                    if b[0] == k[0]:
+                        score_b = score_board[b[1]][b[0]]
+                    elif score_board[b[1]][b[0]] != 10 and score_board[b[1]][b[0]] != 0:
+                        score_b = -10
+                    total_score = score_def + score_i + score_j + score_k + score_b
+                    ways[total_score] = [(x, y), i, j, k, b]
     for i in ways.keys():
         print(str(i) + ": ", end="")
         print(ways[i])
@@ -193,4 +193,3 @@ def drive(world):
     steps = (steps + 1) % 60
     print(steps)
     return res
-# hello
