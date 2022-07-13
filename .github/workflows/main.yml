@@ -39,4 +39,4 @@ jobs:
         pytest
     - name: Pep8 on examples
       run: |
-        pep8 examples
+        pep8 --max-line-length=130 examples
