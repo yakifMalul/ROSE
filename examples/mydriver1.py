@@ -35,11 +35,16 @@ def row(y):
     return res
 
 
-def pos_to_score(world, pos):
-    temp = list()
+def pos_to_obs(world, pos):
     res = list()
     for item in pos:
-        temp.append(world.get(item))
+        res.append(world.get(item))
+    return res
+
+
+def pos_to_score(world, pos):
+    res = list()
+    temp = pos_to_obs(world, pos)
     for item in temp:
         if item == obstacles.PENGUIN:
             score = 10
@@ -163,11 +168,20 @@ def way_to_actions(way):
     return res
 
 
-def penguin_disappear(y):
-    back_rows = list()
-    for i in range(y, 10):
-        back_rows.append(row(i))
-    pass
+def penguin_disappear(world):
+    back_rows_pos = list()
+    back_rows_obs = list()
+    for i in range(world.car.y, 10):
+        back_rows_pos.append(row(i))
+
+    for item in back_rows_pos:
+        back_rows_obs.append(pos_to_obs(world, item))
+
+    for item in back_rows_obs:
+        print(item)
+
+
+
 
 
 def drive(world):
