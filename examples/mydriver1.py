@@ -151,13 +151,14 @@ def best_way(world, score_board):
                     elif score_board[b[1]][b[0]] != 10 and score_board[b[1]][b[0]] != 0:
                         score_b = -10
                     total_score = score_def + score_i + score_j + score_k + score_b
-                    if not is_right:
-                        ways[total_score] = [(x, y), i, j, k, b]
-                    else:
-                        if total_score in list(ways):
-                            pass
-                        else:
-                            ways[total_score] = [(x, y), i, j, k, b]
+                    ways[total_score] = [(x, y), i, j, k, b]
+                    # if not is_right:
+                    #     ways[total_score] = [(x, y), i, j, k, b]
+                    # else:
+                    #     if total_score in list(ways):
+                    #         pass
+                    #     else:
+                    #         ways[total_score] = [(x, y), i, j, k, b]
 
     log("")
     for i in ways.keys():
