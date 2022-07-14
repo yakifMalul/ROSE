@@ -25,7 +25,7 @@ def log(msg):
 def update_world(world, action):
     global world_by_obs, world_by_score, steps, world_actions
 
-    world_by_obs.append(pos_to_obs(world, row(world.car.x)))
+    world_by_obs.append(pos_to_obs(world, row(world.car.y)))
     world_by_score.append(pos_to_score(world, row(world.car.y)))
     world_actions.append(action)
     if steps == 0:
