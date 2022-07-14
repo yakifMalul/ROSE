@@ -4,6 +4,8 @@ This driver does not do any action.
 from rose.common import obstacles, actions  # NOQA
 
 driver_name = "Amit"
+world_by_score = list()
+world_by_obs = list()
 action_list = list()
 cnt = 0
 steps = 0
@@ -12,6 +14,15 @@ x1, x2, x3 = 0, 0, 0
 ox1, ox2, ox3 = 0, 0, 0  # o stand for other
 got_x_values = False
 num_of_steps = 5
+
+
+def update_world(world):
+    global world_by_obs, world_by_score, steps
+    world_by_obs.append(pos_to_obs(world, row(world.car.x)))
+    world_by_score.append(pos_to_score(world, row(world.car.y)))
+    if steps == 0:
+        for i in range(len(world_by_score)):
+            print(str(i) + ":\t" + world_by_score[i] + "\t\t" + world_by_obs[i])
 
 
 def get_x_values(x):
@@ -61,8 +72,6 @@ def pos_to_score(world, pos):
         else:
             score = 0
         res.append(score)
-    print(temp)
-    print(res)
 
     return res
 
@@ -217,4 +226,5 @@ def drive(world):
 
     cnt += 1
     steps = (steps + 1) % 60
+    update_world(world)
     return res
