@@ -18,7 +18,7 @@ num_of_steps = 5
 
 
 def log(msg):
-    print(str(time.strftime("%Y-%m-%d %H:%M:%s")) + "\t" + msg)
+    print(str(time.strftime("%Y-%m-%d %H:%M:%S")) + "\t" + msg)
 
 
 def update_world(world):
@@ -156,6 +156,7 @@ def best_way(world, score_board):
                         else:
                             ways[total_score] = [(x, y), i, j, k, b]
 
+    log("")
     for i in ways.keys():
         print(str(i) + ": ", end="")
         print(ways[i])
