@@ -30,9 +30,10 @@ def update_world(world, action):
     world_actions.append(action)
     if steps == 0:
         for i in range(len(world_by_score)):
-            log(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\t\t + str(world_actions[i]) + "\n")
+            log(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\t\t" + str(world_actions[i]) + "\n")
         world_by_score = list()
         world_by_obs = list()
+        world_actions = list()
 
 
 def get_x_values(x):
