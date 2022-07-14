@@ -4,7 +4,7 @@ This driver does not do any action.
 from rose.common import obstacles, actions  # NOQA
 import time
 
-driver_name = "Amit"
+driver_name = "ROM GOLOVIN"
 world_by_score = list()
 world_by_obs = list()
 world_actions = list()
