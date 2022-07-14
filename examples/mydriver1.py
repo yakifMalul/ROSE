@@ -2,6 +2,7 @@
 This driver does not do any action.
 """
 from rose.common import obstacles, actions  # NOQA
+import datetime
 
 driver_name = "Amit"
 world_by_score = list()
@@ -22,7 +23,9 @@ def update_world(world):
     world_by_score.append(pos_to_score(world, row(world.car.y)))
     if steps == 0:
         for i in range(len(world_by_score)):
-            print(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\n")
+            print(str(i) + str(datetime.datetime.now().hour) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\n")
+        world_by_score.clear()
+        world_by_obs.clear()
 
 
 def get_x_values(x):
