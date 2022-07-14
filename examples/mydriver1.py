@@ -7,18 +7,26 @@ driver_name = "Amit"
 action_list = list()
 cnt = 0
 steps = 0
+is_right = False
 x1, x2, x3 = 0, 0, 0
+ox1, ox2, ox3 = 0, 0, 0  # o stand for other
 got_x_values = False
 num_of_steps = 5
 
 
 def get_x_values(x):
-    global got_x_values, x1, x2, x3
+    global is_right, got_x_values, x1, x2, x3, ox1, ox2, ox3
     if not got_x_values:
         x1 = x - 1
         x2 = x
         x3 = x + 1
         got_x_values = True
+        if 0 <= x2 <= 2:
+            is_right = False
+            ox1, ox2, ox3 = 3, 4, 5
+        elif 3 <= x2 <= 5:
+            is_right = True
+            ox1, ox2, ox3 = 0, 1, 2
 
 
 def row(y):
@@ -118,9 +126,9 @@ def best_way(world, score_board):
                     elif score_board[b[1]][b[0]] != 10 and score_board[b[1]][b[0]] != 0:
                         score_b = -10
                     total_score = score_def + score_i + score_j + score_k + score_b
-                    if 0 <= world.car.x <= 2:
+                    if not is_right:
                         ways[total_score] = [(x, y), i, j, k, b]
-                    elif 3 <= world.car.x <= 5:
+                    else:
                         if total_score in list(ways):
                             pass
                         else:
@@ -153,6 +161,13 @@ def way_to_actions(way):
             # mid
             res.append(actions.NONE)
     return res
+
+
+def penguin_disappear(y):
+    back_rows = list()
+    for i in range(y, 10):
+        back_rows.append(row(i))
+    pass
 
 
 def drive(world):
