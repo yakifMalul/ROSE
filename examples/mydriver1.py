@@ -191,20 +191,17 @@ def way_to_actions(way):
     return res
 
 
-def penguin_disappear(world):
-    back_rows_pos = list()
-    back_rows_obs = list()
-    for i in range(world.car.y, 10):
-        back_rows_pos.append(row(i))
-
-    for item in back_rows_pos:
-        back_rows_obs.append(pos_to_obs(world, item))
-
-    for item in back_rows_obs:
-        print(item)
-
-
-
+# def penguin_disappear(world):
+#     back_rows_pos = list()
+#     back_rows_obs = list()
+#     for i in range(world.car.y, 10):
+#         back_rows_pos.append(row(i))
+#
+#     for item in back_rows_pos:
+#         back_rows_obs.append(pos_to_obs(world, item))
+#
+#     for item in back_rows_obs:
+#         print(item)
 
 
 def drive(world):
