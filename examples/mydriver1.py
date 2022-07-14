@@ -22,7 +22,7 @@ def update_world(world):
     world_by_score.append(pos_to_score(world, row(world.car.y)))
     if steps == 0:
         for i in range(len(world_by_score)):
-            print(str(i) + ":\t" + world_by_score[i] + "\t\t" + world_by_obs[i])
+            print(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]))
 
 
 def get_x_values(x):
@@ -147,6 +147,7 @@ def best_way(world, score_board):
                             pass
                         else:
                             ways[total_score] = [(x, y), i, j, k, b]
+
     for i in ways.keys():
         print(str(i) + ": ", end="")
         print(ways[i])
