@@ -17,15 +17,18 @@ got_x_values = False
 num_of_steps = 5
 
 
+def log(msg):
+    print(str(time.strftime("%Y-%m-%d %H:%M:%s")) + "\t" + msg)
+
+
 def update_world(world):
     global world_by_obs, world_by_score, steps
 
     world_by_obs.append(pos_to_obs(world, row(world.car.x)))
     world_by_score.append(pos_to_score(world, row(world.car.y)))
     if steps == 0:
-        print(time.strftime("%Y-%m-%d %H:%M"))
         for i in range(len(world_by_score)):
-            print(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\n")
+            log(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\n")
         world_by_score = list()
         world_by_obs = list()
 
