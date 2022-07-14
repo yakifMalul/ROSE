@@ -211,7 +211,7 @@ def drive(world):
     y = world.car.y
     get_x_values(x)
 
-    if steps <= 55:
+    if steps < 55:
         score_board = world_to_score_board(world)
         action_list = way_to_actions(best_way(world, score_board))
         res = action_list[0]
