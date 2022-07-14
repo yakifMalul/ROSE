@@ -22,7 +22,7 @@ def update_world(world):
     world_by_score.append(pos_to_score(world, row(world.car.y)))
     if steps == 0:
         for i in range(len(world_by_score)):
-            print(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]))
+            print(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\n")
 
 
 def get_x_values(x):
