@@ -19,13 +19,15 @@ num_of_steps = 5
 
 def update_world(world):
     global world_by_obs, world_by_score, steps
+
     world_by_obs.append(pos_to_obs(world, row(world.car.x)))
     world_by_score.append(pos_to_score(world, row(world.car.y)))
     if steps == 0:
+        printstr(datetime.datetime.now().hour)
         for i in range(len(world_by_score)):
-            print(str(i) + str(datetime.datetime.now().hour) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\n")
-        world_by_score.clear()
-        world_by_obs.clear()
+            print(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\n")
+        world_by_score = list()
+        world_by_obs = list()
 
 
 def get_x_values(x):
