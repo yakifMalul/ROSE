@@ -7,6 +7,7 @@ import time
 driver_name = "Amit"
 world_by_score = list()
 world_by_obs = list()
+world_actions = list()
 action_list = list()
 cnt = 0
 steps = 0
@@ -21,14 +22,15 @@ def log(msg):
     print(str(time.strftime("%Y-%m-%d %H:%M:%S")) + "\t" + msg)
 
 
-def update_world(world):
-    global world_by_obs, world_by_score, steps
+def update_world(world, action):
+    global world_by_obs, world_by_score, steps, world_actions
 
     world_by_obs.append(pos_to_obs(world, row(world.car.x)))
     world_by_score.append(pos_to_score(world, row(world.car.y)))
+    world_actions.append(action)
     if steps == 0:
         for i in range(len(world_by_score)):
-            log(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\n")
+            log(str(i) + ":\t" + str(world_by_score[i]) + "\t\t" + str(world_by_obs[i]) + "\t\t + str(world_actions[i]) + "\n")
         world_by_score = list()
         world_by_obs = list()
 
@@ -236,5 +238,5 @@ def drive(world):
 
     cnt += 1
     steps = (steps + 1) % 60
-    update_world(world)
+    update_world(world, res)
     return res
