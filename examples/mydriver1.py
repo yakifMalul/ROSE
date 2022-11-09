@@ -19,10 +19,18 @@ num_of_steps = 5
 
 
 def log(msg):
+    """
+    The function prints a certain message with time and date.
+    @param msg: the message that the function prints
+    """
     print(str(time.strftime("%Y-%m-%d %H:%M:%S")) + "\t" + msg)
 
 
 def update_world(world, action):
+    """
+    The functions updates every move about where is all the obstacles are
+    @param world: the track
+    """
     global world_by_obs, world_by_score, steps, world_actions
 
     world_by_obs.append(pos_to_obs(world, row(world.car.y)))
@@ -37,6 +45,10 @@ def update_world(world, action):
 
 
 def get_x_values(x):
+    """
+    The function check in which side of the screen is the player and states an absolutes x's
+    @param x: the current coll in which the player is in
+    """
     global is_right, got_x_values, x1, x2, x3, ox1, ox2, ox3
     if not got_x_values:
         x1 = x - 1
@@ -52,12 +64,23 @@ def get_x_values(x):
 
 
 def row(y):
+    """
+    The function returns a certain row
+    @param y: the number of row to get
+    @return: list with the positions in the y row
+    """
     global x1, x2, x3
     res = [(x1, y), (x2, y), (x3, y)]
     return res
 
 
 def pos_to_obs(world, pos):
+    """
+    The function takes a position, checks whats appearing in that position and turns it into an obstacle
+    @param world: the track
+    @param pos: a position to check whats in it
+    @return: a list with the obstacle
+    """
     res = list()
     for item in pos:
         res.append(world.get(item))
@@ -65,6 +88,12 @@ def pos_to_obs(world, pos):
 
 
 def pos_to_score(world, pos):
+    """
+    The function takes a position, checks whats appearing in that position and turns it to a score
+    @param world: the track
+    @param pos: a position to check whats in it
+    @return: a list with the scores
+    """
     res = list()
     temp = pos_to_obs(world, pos)
     for item in temp:
@@ -88,6 +117,11 @@ def pos_to_score(world, pos):
 
 
 def world_to_score_board(world):
+    """
+    The function makes a list that display the world with scores and not with obstacles
+    @param world: the track
+    @return: list of the track displayed by scores
+    """
     global num_of_steps
     score_board = list()
     y = world.car.y
@@ -98,6 +132,11 @@ def world_to_score_board(world):
 
 
 def get_connected(x, y):
+    """
+    The function checks and returns the possible position you can get to while on current position
+    @param x, y: current x and y position
+    @return: list of possible positions to go to
+    """
     global x1, x2, x3
     res = list()
     if x == x1 or x == 0:
@@ -114,6 +153,13 @@ def get_connected(x, y):
 
 
 def best_way(world, score_board):
+    """
+    The function checks every possible way for the player to go to
+    and finds the way the player must go through in order to get the most score
+    @param world: the track
+    @param score_board: the board displayed by scores
+    @return: list of the best way the player can go through
+    """
     y = len(score_board) - 1
     x = world.car.x
 
@@ -174,6 +220,11 @@ def best_way(world, score_board):
 
 
 def way_to_actions(way):
+    """
+    The function crates a list of actions the player must do for the optimal way
+    @param way: list with the optimal x's
+    @return: list actions for optimal way
+    """
     res = list()
     for i in range(len(way) - 1):
         x_0 = way[i][0]
@@ -205,6 +256,11 @@ def way_to_actions(way):
 
 
 def drive(world):
+    """
+    The function tells the player what to do as the next action
+    @param world: the track
+    @return: the action the player will do
+    """
     global action_list, cnt, num_of_steps, steps
     res = actions.NONE
     x = world.car.x
