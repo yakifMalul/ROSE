@@ -199,6 +199,7 @@ x1, x2, x3 = 0, 0, 0
 ox1, ox2, ox3 = 0, 0, 0  # o stand for other
 got_x_values = False
 num_of_steps = 5
+found_penguin = False
 
 
 def log(msg):
@@ -237,6 +238,21 @@ def get_x_values(x):
 def row(y):
     global x1, x2, x3
     res = [(x1, y), (x2, y), (x3, y)]
+    return res
+
+
+def other_row(y):
+    global ox1, ox2, ox3
+    res = [(ox1, y), (ox2, y), (ox3, y)]
+    return res
+
+
+def full_row(y):
+    global x1, x2, x3, ox1, ox2, ox3, is_right
+    if is_right:
+        res = [(ox1, y), (ox2, y), (ox3, y), (x1, y), (x2, y), (x3, y)]
+    else:
+        res = [(x1, y), (x2, y), (x3, y), (ox1, y), (ox2, y), (ox3, y)]
     return res
 
 
@@ -296,6 +312,58 @@ def get_connected(x, y):
     return res
 
 
+def get_full_connected(x, y):
+    global x1, x2, x3, ox1, ox2, ox3, is_right
+    res = list()
+    if is_right:
+        if x == ox1:
+            res.append((0, y - 1))
+            res.append((1, y - 1))
+        elif x == ox2:
+            res.append((0, y - 1))
+            res.append((1, y - 1))
+            res.append((2, y - 1))
+        elif x == ox3:
+            res.append((1, y - 1))
+            res.append((2, y - 1))
+            res.append((3, y - 1))
+        elif x == x1:
+            res.append((2, y - 1))
+            res.append((3, y - 1))
+            res.append((4, y - 1))
+        elif x == x2 or x == 1:
+            res.append((3, y - 1))
+            res.append((4, y - 1))
+            res.append((5, y - 1))
+        elif x == x3 or x == 2:
+            res.append((4, y - 1))
+            res.append((5, y - 1))
+    else:
+        if x == x1:
+            res.append((0, y - 1))
+            res.append((1, y - 1))
+        elif x == x2 or x == 1:
+            res.append((0, y - 1))
+            res.append((1, y - 1))
+            res.append((2, y - 1))
+        elif x == x3 or x == 2:
+            res.append((1, y - 1))
+            res.append((2, y - 1))
+            res.append((3, y - 1))
+        elif x == ox1:
+            res.append((2, y - 1))
+            res.append((3, y - 1))
+            res.append((4, y - 1))
+        elif x == ox2:
+            res.append((3, y - 1))
+            res.append((4, y - 1))
+            res.append((5, y - 1))
+        elif x == ox3:
+            res.append((4, y - 1))
+            res.append((5, y - 1))
+    return res
+
+
 def best_way(world, score_board):
     y = len(score_board) - 1
     x = world.car.x
@@ -335,7 +403,7 @@ def best_way(world, score_board):
                         score_b = -10
                     total_score = score_def + score_i + score_j + score_k + score_b
                     ways[total_score] = [(x, y), i, j, k, b]
-                    # if not is_right:
+                    # if is_right:
                     #     ways[total_score] = [(x, y), i, j, k, b]
                     # else:
                     #     if total_score in list(ways):
@@ -373,6 +441,12 @@ def way_to_actions(way):
             res.append(actions.NONE)
     return res
 
+
+def penguin_detect(world):
+    global found_penguin
+    orow = pos_to_obs(other_row(world.car.y))
+    if obstacles.PENGUIN in orow:
+        found_penguin = True
 
 # def penguin_disappear(world):
 #     back_rows_pos = list()
