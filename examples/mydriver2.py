@@ -226,9 +226,10 @@ def update_world(world, action):
 
 
 def setup(x, y):
-    global is_right, did_setup, x1, x2, x3, ox1, ox2, ox3, def_y, mode
+    global is_right, did_setup, x1, x2, x3, ox1, ox2, ox3, def_y, mode, found_penguin
     if not did_setup:
         mode = 1
+        found_penguin = False
         def_y = y
         x1 = x - 1
         x2 = x
