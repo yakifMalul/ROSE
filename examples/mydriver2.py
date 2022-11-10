@@ -533,7 +533,7 @@ def penguin_disappear(world):
             (world.car.y == def_y + 1 and found_penguin_dorow_1):
         dorow = pos_to_obs(world, other_row(def_y+1))
         dorow_1 = pos_to_obs(world, other_row(def_y+2))
-        if not (obstacles.PENGUIN in dorow and bstacles.PENGUIN in dorow_1):
+        if not (obstacles.PENGUIN in dorow and obstacles.PENGUIN in dorow_1):
             log("penguin disappeared")
             mode = 2
         else:
