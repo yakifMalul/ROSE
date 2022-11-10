@@ -200,7 +200,8 @@ ox1, ox2, ox3 = 0, 0, 0  # o stand for other
 def_y = -1
 did_setup = False
 num_of_steps = 5
-found_penguin = False
+found_penguin_dorow = False
+found_penguin_dorow_1 = False
 mode = 1
 # 1- only defult lane
 # 2- whole screen
@@ -226,15 +227,15 @@ def update_world(world, action):
 
 
 def setup(x, y):
-    global is_right, steps, x1, x2, x3, ox1, ox2, ox3, def_y, mode, found_penguin
+    global is_right, steps, x1, x2, x3, ox1, ox2, ox3, def_y, mode, found_penguin_dorow, found_penguin_dorow_1
     if steps == 0:
         mode = 1
-        found_penguin = False
+        found_penguin_dorow = False
+        found_penguin_dorow_1 = False
         def_y = y
         x1 = x - 1
         x2 = x
         x3 = x + 1
-        did_setup = True
         if 0 <= x2 <= 2:
             is_right = False
             ox1, ox2, ox3 = 3, 4, 5
@@ -511,25 +512,36 @@ def way_to_actions(way):
 
 
 def penguin_detect(world):
-    global found_penguin
-    orow = pos_to_obs(world, other_row(world.car.y))
-    if obstacles.PENGUIN in orow:
+    global def_y, found_penguin_dorow, found_penguin_dorow_1
+    dorow = pos_to_obs(world, other_row(def_y))
+    dorow_1 = pos_to_obs(world, other_row(def_y+1))
+    if obstacles.PENGUIN in dorow:
         log("found peng")
-        found_penguin = True
+        found_penguin_dorow = True
     else:
-        found_penguin = False
+        found_penguin_dorow = False
+    if obstacles.PENGUIN in dorow_1:
+        log("found peng")
+        found_penguin_dorow_1 = True
+    else:
+        found_penguin_dorow_1 = False
 
 
 def penguin_disappear(world):
-    global def_y, found_penguin, mode
+    global def_y, found_penguin_dorow, found_penguin_dorow_1, mode
     if found_penguin and world.car.y == def_y:
-        orow = pos_to_obs(world, other_row(def_y + 1))
-        if obstacles.PENGUIN in orow:
-            return False
-        else:
+        dorow = pos_to_obs(world, other_row(def_y+1))
+        dorow_1 = pos_to_obs(world, other_row(def_y+2))
+        if obstacles.PENGUIN in dorow:
+            pass
+        else:  # penguin disappeared
             log("penguin disapper")
             mode = 2
-    return True
+        if obstacles.PENGUIN in dorow_1:
+            pass
+        else:  # penguin disappeared
+            log("penguin disapper")
+            mode = 2
 
 
 def drive_normal(world):
