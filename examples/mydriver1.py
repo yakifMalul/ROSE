@@ -265,23 +265,23 @@ def drive(world):
     res = actions.NONE
     x = world.car.x
     y = world.car.y
-    # get_x_values(x)
-    #
-    # if steps < 55:
-    #     score_board = world_to_score_board(world)
-    #     action_list = way_to_actions(best_way(world, score_board))
-    #     res = action_list[0]
-    # else:
-    #     if cnt >= num_of_steps - 1:
-    #         cnt = 0
-    #     if cnt == 0:
-    #         score_board = world_to_score_board(world)
-    #         action_list = way_to_actions(best_way(world, score_board))
-    #         print(action_list)
-    #         res = action_list[0]
-    #     elif 0 < cnt < num_of_steps - 1:
-    #         res = action_list[cnt]
-    #
+    get_x_values(x)
+
+    if steps < 55:
+        score_board = world_to_score_board(world)
+        action_list = way_to_actions(best_way(world, score_board))
+        res = action_list[0]
+    else:
+        if cnt >= num_of_steps - 1:
+            cnt = 0
+        if cnt == 0:
+            score_board = world_to_score_board(world)
+            action_list = way_to_actions(best_way(world, score_board))
+            print(action_list)
+            res = action_list[0]
+        elif 0 < cnt < num_of_steps - 1:
+            res = action_list[cnt]
+
     if res == actions.NONE:
         obstacle = world.get((x, y - 1))
         if obstacle == obstacles.PENGUIN:
