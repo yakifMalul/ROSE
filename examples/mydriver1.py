@@ -263,8 +263,8 @@ def drive(world):
     """
     global action_list, cnt, num_of_steps, steps
     res = actions.NONE
-    # x = world.car.x
-    # y = world.car.y
+    x = world.car.x
+    y = world.car.y
     # get_x_values(x)
     #
     # if steps < 55:
