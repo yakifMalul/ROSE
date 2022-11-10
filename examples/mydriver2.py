@@ -526,11 +526,12 @@ def penguin_disappear(world):
             return False
         else:
             log("penguin disapper")
+            mode = 2
     return True
 
 
-def drive(world):
-    global action_list, cnt, num_of_steps, steps, mode
+def drive_normal(world):
+    global action_list, cnt, num_of_steps, steps
     res = actions.NONE
     x = world.car.x
     y = world.car.y
@@ -566,3 +567,52 @@ def drive(world):
     steps = (steps + 1) % 60
     update_world(world, res)
     return res
+
+
+def drive_full_screen(world):
+    global action_list, cnt, num_of_steps, steps
+    res = actions.NONE
+    x = world.car.x
+    y = world.car.y
+    get_x_values(x, y)
+    penguin_disappear(world)
+    penguin_detect(world)
+
+    if steps < 55:
+        score_board = world_to_score_board(world)
+        action_list = way_to_actions(best_full_way(world, score_board))
+        res = action_list[0]
+    else:
+        if cnt >= num_of_steps - 1:
+            cnt = 0
+        if cnt == 0:
+            score_board = world_to_score_board(world)
+            action_list = way_to_actions(best_full_way(world, score_board))
+            print(action_list)
+            res = action_list[0]
+        elif 0 < cnt < num_of_steps - 1:
+            res = action_list[cnt]
+
+    if res == actions.NONE:
+        obstacle = world.get((x, y - 1))
+        if obstacle == obstacles.PENGUIN:
+            res = actions.PICKUP
+        elif obstacle == obstacles.WATER:
+            res = actions.BRAKE
+        elif obstacle == obstacles.CRACK:
+            res = actions.JUMP
+
+    cnt += 1
+    steps = (steps + 1) % 60
+    update_world(world, res)
+    return res
+
+
+def drive(world):
+    global mode
+    if mode == 1:
+        return drive_normal(world)
+    elif mode == 2:
+        return drive_full_screen(world)
+    return actions.NONE
+
