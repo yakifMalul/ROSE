@@ -535,8 +535,9 @@ def drive(world):
     x = world.car.x
     y = world.car.y
     get_x_values(x, y)
-    penguin_detect(world)
     penguin_disappear(world)
+    penguin_detect(world)
+
     if steps < 55:
         score_board = world_to_score_board(world)
         action_list = way_to_actions(best_way(world, score_board))
