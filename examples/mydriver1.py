@@ -197,7 +197,6 @@ def best_way(world, score_board):
                     elif score_board[b[1]][b[0]] != 10 and score_board[b[1]][b[0]] != 0:
                         score_b = -10
                     total_score = score_def + score_i + score_j + score_k + score_b
-                    # ways[total_score] = [(x, y), i, j, k, b]
                     if not is_right:
                         ways[total_score] = [(x, y), i, j, k, b]
                     else:
@@ -240,19 +239,6 @@ def way_to_actions(way):
             # mid
             res.append(actions.NONE)
     return res
-
-
-# def penguin_disappear(world):
-#     back_rows_pos = list()
-#     back_rows_obs = list()
-#     for i in range(world.car.y, 10):
-#         back_rows_pos.append(row(i))
-#
-#     for item in back_rows_pos:
-#         back_rows_obs.append(pos_to_obs(world, item))
-#
-#     for item in back_rows_obs:
-#         print(item)
 
 
 def drive(world):
