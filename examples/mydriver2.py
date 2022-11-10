@@ -420,11 +420,6 @@ def best_way(world, score_board):
                         else:
                             ways[total_score] = [(x, y), i, j, k, b]
 
-    log("")
-    for i in ways.keys():
-        print(str(i) + ": ", end="")
-        print(ways[i])
-
     big = list(ways)[0]
     for key in ways.keys():
         if big < key:
@@ -472,18 +467,13 @@ def best_full_way(world, score_board):
                         score_b = -10
                     total_score = score_def + score_i + score_j + score_k + score_b
                     ways[total_score] = [(x, y), i, j, k, b]
-                    # if is_right:
-                    #     ways[total_score] = [(x, y), i, j, k, b]
-                    # else:
-                    #     if total_score in list(ways):
-                    #         pass
-                    #     else:
-                    #         ways[total_score] = [(x, y), i, j, k, b]
-
-    log("")
-    for i in ways.keys():
-        print(str(i) + ": ", end="")
-        print(ways[i])
+                    if not is_right:
+                        ways[total_score] = [(x, y), i, j, k, b]
+                    else:
+                        if total_score in list(ways):
+                            pass
+                        else:
+                            ways[total_score] = [(x, y), i, j, k, b]
 
     big = list(ways)[0]
     for key in ways.keys():
