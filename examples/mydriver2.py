@@ -197,9 +197,14 @@ steps = 0
 is_right = False
 x1, x2, x3 = 0, 0, 0
 ox1, ox2, ox3 = 0, 0, 0  # o stand for other
+def_y = -1
 got_x_values = False
 num_of_steps = 5
 found_penguin = False
+mode = 1
+# 1- only defult lane
+# 2- whole screen
+# 3- opponent lane
 
 
 def log(msg):
@@ -220,9 +225,10 @@ def update_world(world, action):
         world_actions = list()
 
 
-def get_x_values(x):
-    global is_right, got_x_values, x1, x2, x3, ox1, ox2, ox3
+def get_x_values(x, y):
+    global is_right, got_x_values, x1, x2, x3, ox1, ox2, ox3, def_y
     if not got_x_values:
+        def_y = y
         x1 = x - 1
         x2 = x
         x3 = x + 1
@@ -508,25 +514,24 @@ def penguin_detect(world):
     if obstacles.PENGUIN in orow:
         found_penguin = True
 
-# def penguin_disappear(world):
-#     back_rows_pos = list()
-#     back_rows_obs = list()
-#     for i in range(world.car.y, 10):
-#         back_rows_pos.append(row(i))
-#
-#     for item in back_rows_pos:
-#         back_rows_obs.append(pos_to_obs(world, item))
-#
-#     for item in back_rows_obs:
-#         print(item)
+
+def penguin_disappear(world):
+    global def_y, found_penguin, mode
+    if found_penguin and world.car.y == def_y:
+        orow = pos_to_obs(other_row(def_y - 1))
+        if obstacles.PENGUIN in orow:
+            return False
+        else:
+            log("penguin disapper")
+    return True
 
 
 def drive(world):
-    global action_list, cnt, num_of_steps, steps
+    global action_list, cnt, num_of_steps, steps, mode
     res = actions.NONE
     x = world.car.x
     y = world.car.y
-    get_x_values(x)
+    get_x_values(x, y)
 
     if steps < 55:
         score_board = world_to_score_board(world)
