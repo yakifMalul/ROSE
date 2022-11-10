@@ -619,10 +619,11 @@ def drive_full_screen(world):
 def drive(world):
     global mode
     setup(world.car.x, world.car.y)
+    log("mode is " + str(mode))
     if mode == 1:
         return drive_normal(world)
     elif mode == 2:
         return drive_full_screen(world)
-    log("mode is " + str(mode))
+
     return actions.NONE
 
