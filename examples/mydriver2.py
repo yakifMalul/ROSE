@@ -514,12 +514,14 @@ def penguin_detect(world):
     if obstacles.PENGUIN in orow:
         log("found peng")
         found_penguin = True
+    else:
+        found_penguin = False
 
 
 def penguin_disappear(world):
     global def_y, found_penguin, mode
     if found_penguin and world.car.y == def_y:
-        orow = pos_to_obs(world, other_row(def_y - 1))
+        orow = pos_to_obs(world, other_row(def_y + 1))
         if obstacles.PENGUIN in orow:
             return False
         else:
