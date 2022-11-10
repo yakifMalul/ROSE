@@ -292,7 +292,7 @@ def world_to_score_board(world):
     y = world.car.y
 
     for i in range(num_of_steps, -1, -1):
-        score_board.append(pos_to_score(world, row(y-i)))
+        score_board.append(pos_to_score(world, full_row(y-i)))
     return score_board
 
 
