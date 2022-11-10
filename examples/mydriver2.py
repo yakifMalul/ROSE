@@ -521,7 +521,7 @@ def penguin_detect(world):
     else:
         found_penguin_dorow = False
     if obstacles.PENGUIN in dorow_1:
-        log("found peng")
+        log("found peng 1")
         found_penguin_dorow_1 = True
     else:
         found_penguin_dorow_1 = False
