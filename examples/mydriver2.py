@@ -226,8 +226,8 @@ def update_world(world, action):
 
 
 def setup(x, y):
-    global is_right, did_setup, x1, x2, x3, ox1, ox2, ox3, def_y, mode, found_penguin
-    if not did_setup:
+    global is_right, steps, x1, x2, x3, ox1, ox2, ox3, def_y, mode, found_penguin
+    if steps == 0:
         mode = 1
         found_penguin = False
         def_y = y
@@ -537,7 +537,6 @@ def drive_normal(world):
     res = actions.NONE
     x = world.car.x
     y = world.car.y
-    setup(x, y)
     penguin_disappear(world)
     penguin_detect(world)
 
@@ -576,7 +575,6 @@ def drive_full_screen(world):
     res = actions.NONE
     x = world.car.x
     y = world.car.y
-    setup(x, y)
     penguin_disappear(world)
     penguin_detect(world)
 
@@ -612,6 +610,7 @@ def drive_full_screen(world):
 
 def drive(world):
     global mode
+    setup(world.car.x, world.car.y)
     if mode == 1:
         return drive_normal(world)
     elif mode == 2:
