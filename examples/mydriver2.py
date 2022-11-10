@@ -331,22 +331,22 @@ def get_full_connected(x, y):
             res.append((2, y - 1))
             res.append((3, y - 1))
             res.append((4, y - 1))
-        elif x == x2 or x == 1:
+        elif x == x2:
             res.append((3, y - 1))
             res.append((4, y - 1))
             res.append((5, y - 1))
-        elif x == x3 or x == 2:
+        elif x == x3:
             res.append((4, y - 1))
             res.append((5, y - 1))
     else:
         if x == x1:
             res.append((0, y - 1))
             res.append((1, y - 1))
-        elif x == x2 or x == 1:
+        elif x == x2:
             res.append((0, y - 1))
             res.append((1, y - 1))
             res.append((2, y - 1))
-        elif x == x3 or x == 2:
+        elif x == x3:
             res.append((1, y - 1))
             res.append((2, y - 1))
             res.append((3, y - 1))
@@ -424,6 +424,66 @@ def best_way(world, score_board):
     return ways[big]
 
 
+def best_full_way(world, score_board):
+    y = len(score_board) - 1
+    x = world.car.x
+
+    if x == x3:
+        x = 2
+    elif x == x2:
+        x = 1
+    elif x == x1:
+        x = 0
+
+    ways = dict()
+    score_def = score_board[y][x]
+    for i in get_full_connected(x, y):
+        score_i = 0
+        if i[0] == x:
+            score_i = score_board[i[1]][i[0]]
+        elif score_board[i[1]][i[0]] != 10 and score_board[i[1]][i[0]] != 0:
+            score_i = -10
+        for j in get_full_connected(i[0], i[1]):
+            score_j = 0
+            if j[0] == i[0]:
+                score_j = score_board[j[1]][j[0]]
+            elif score_board[j[1]][j[0]] != 10 and score_board[j[1]][j[0]] != 0:
+                score_j = -10
+            for k in get_full_connected(j[0], j[1]):
+                score_k = 0
+                if k[0] == j[0]:
+                    score_k = score_board[k[1]][k[0]]
+                elif score_board[k[1]][k[0]] != 10 and score_board[k[1]][k[0]] != 0:
+                    score_k = -10
+                for b in get_full_connected(k[0], k[1]):
+                    score_b = 0
+                    if b[0] == k[0]:
+                        score_b = score_board[b[1]][b[0]]
+                    elif score_board[b[1]][b[0]] != 10 and score_board[b[1]][b[0]] != 0:
+                        score_b = -10
+                    total_score = score_def + score_i + score_j + score_k + score_b
+                    ways[total_score] = [(x, y), i, j, k, b]
+                    # if is_right:
+                    #     ways[total_score] = [(x, y), i, j, k, b]
+                    # else:
+                    #     if total_score in list(ways):
+                    #         pass
+                    #     else:
+                    #         ways[total_score] = [(x, y), i, j, k, b]
+
+    log("")
+    for i in ways.keys():
+        print(str(i) + ": ", end="")
+        print(ways[i])
+
+    big = list(ways)[0]
+    for key in ways.keys():
+        if big < key:
+            big = key
+
+    return ways[big]
+
+
 def way_to_actions(way):
     res = list()
     for i in range(len(way) - 1):
@@ -470,14 +530,14 @@ def drive(world):
 
     if steps < 55:
         score_board = world_to_score_board(world)
-        action_list = way_to_actions(best_way(world, score_board))
+        action_list = way_to_actions(best_full_way(world, score_board))
         res = action_list[0]
     else:
         if cnt >= num_of_steps - 1:
             cnt = 0
         if cnt == 0:
             score_board = world_to_score_board(world)
-            action_list = way_to_actions(best_way(world, score_board))
+            action_list = way_to_actions(best_full_way(world, score_board))
             print(action_list)
             res = action_list[0]
         elif 0 < cnt < num_of_steps - 1:
