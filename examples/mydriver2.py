@@ -529,7 +529,8 @@ def penguin_detect(world):
 
 def penguin_disappear(world):
     global def_y, found_penguin_dorow, found_penguin_dorow_1, mode
-    if found_penguin and world.car.y == def_y:
+    if (world.car.y == def_y and (found_penguin_dorow or found_penguin_dorow_1)) or \
+            (world.car.y == def_y + 1 and found_penguin_dorow_1):
         dorow = pos_to_obs(world, other_row(def_y+1))
         dorow_1 = pos_to_obs(world, other_row(def_y+2))
         if obstacles.PENGUIN in dorow:
