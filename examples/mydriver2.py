@@ -623,6 +623,6 @@ def drive(world):
         return drive_normal(world)
     elif mode == 2:
         return drive_full_screen(world)
-    log(mode)
+    log("mode is " + str(mode))
     return actions.NONE
 
