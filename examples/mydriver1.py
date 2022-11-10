@@ -282,14 +282,14 @@ def drive(world):
     #     elif 0 < cnt < num_of_steps - 1:
     #         res = action_list[cnt]
     #
-    # if res == actions.NONE:
-    #     obstacle = world.get((x, y - 1))
-    #     if obstacle == obstacles.PENGUIN:
-    #         res = actions.PICKUP
-    #     elif obstacle == obstacles.WATER:
-    #         res = actions.BRAKE
-    #     elif obstacle == obstacles.CRACK:
-    #         res = actions.JUMP
+    if res == actions.NONE:
+        obstacle = world.get((x, y - 1))
+        if obstacle == obstacles.PENGUIN:
+            res = actions.PICKUP
+        elif obstacle == obstacles.WATER:
+            res = actions.BRAKE
+        elif obstacle == obstacles.CRACK:
+            res = actions.JUMP
 
     cnt += 1
     steps = (steps + 1) % 60
